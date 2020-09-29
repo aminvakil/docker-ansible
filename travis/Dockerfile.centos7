@@ -13,9 +13,9 @@ rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
 rm -f /lib/systemd/system/basic.target.wants/*;\
 rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-RUN yum -y install python-pip && yum clean all
+RUN yum -y install python3-pip && yum clean all
 
-RUN pip install ansible
+RUN pip3 install ansible
 
 VOLUME ["/sys/fs/cgroup"]
 
