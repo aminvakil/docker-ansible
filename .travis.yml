@@ -33,14 +33,14 @@ env:
 #   - hadolint travis-Dockerfile.${distribution}${version}
 install:
   - docker pull ${distribution}:${version}
-  - docker build --no-cache --rm --file=travis/Dockerfile.${distribution}${version} --tag=${distribution}${version} travis
+  - docker build --no-cache --rm --file=travis/Dockerfile.${distribution}${version} --tag=${distribution}${version}:travis travis
 script:
   - container_id=$(mktemp)
-  - docker run --detach --privileged --cap-add=ALL -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /lib/modules:/lib/modules:ro ${distribution}${version}:docker > "${container_id}"
+  - docker run --detach --privileged --cap-add=ALL -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /lib/modules:/lib/modules:ro ${distribution}${version}:travis > "${container_id}"
   - sleep 5
   - docker ps -f id=${container_id}
   - docker rm -f "$(cat ${container_id})"
 after_success:
-  - docker tag ${distribution}${version} quay.io/aminvakil/docker-${distribution}${version}-ansible
+  - docker tag ${distribution}${version}:travis quay.io/aminvakil/docker-${distribution}${version}-ansible
   - docker login quay.io -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD"
   - docker push quay.io/aminvakil/docker-${distribution}${version}-ansible
