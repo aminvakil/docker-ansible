@@ -6,29 +6,31 @@ services: docker
 env:
   global:
     - HADOLINT_VERSION=1.18.0
-  - distribution: centos
-    version: 8
-  - distribution: centos
-    version: 7
-  - distribution: debian
-    version: buster
-  - distribution: ubuntu
-    version: focal
-  - distribution: ubuntu
-    version: bionic
-  - distribution: fedora
-    version: 32
-  - distribution: fedora
-    version: 31
-  - distribution: fedora
-    version: 30
-  - distribution: fedora
-    version: 29
-
-#before_install:
-#  - sudo curl -L https://github.com/hadolint/hadolint/releases/download/v$HADOLINT_VERSION/hadolint-$(uname -s)-$(uname -m) -o /usr/local/bin/hadolint
-#  - sudo chmod 755 /usr/local/bin/hadolint
-#  - hadolint travis-Dockerfile.${distribution}${version}
+  jobs:
+    - distribution: centos
+      version: 8
+    - distribution: centos
+      version: 7
+    - distribution: debian
+      version: 10
+    - distribution: ubuntu
+      version: 20.04
+    - distribution: ubuntu
+      version: 18.04
+    - distribution: ubuntu
+      version: 16.04
+    - distribution: fedora
+      version: 32
+    - distribution: fedora
+      version: 31
+    - distribution: fedora
+      version: 30
+    - distribution: fedora
+      version: 29
+# before_install:
+#   - sudo curl -L https://github.com/hadolint/hadolint/releases/download/v$HADOLINT_VERSION/hadolint-$(uname -s)-$(uname -m) -o /usr/local/bin/hadolint
+#   - sudo chmod 755 /usr/local/bin/hadolint
+#   - hadolint travis-Dockerfile.${distribution}${version}
 install:
   - docker pull ${distribution}:${version}
   - docker build --no-cache --rm --file=travis/Dockerfile.${distribution}${version} --tag=${distribution}${version} travis
@@ -42,4 +44,3 @@ after_success:
   - docker tag ${distribution}${version} quay.io/aminvakil/docker-${distribution}${version}-ansible
   - docker login quay.io -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD"
   - docker push quay.io/aminvakil/docker-${distribution}${version}-ansible
-
