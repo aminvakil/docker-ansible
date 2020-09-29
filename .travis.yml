@@ -4,8 +4,6 @@ os: linux
 dist: bionic
 services: docker
 env:
-  global:
-    - HADOLINT_VERSION=1.18.0
   jobs:
     - distribution: centos
       version: 8
@@ -27,10 +25,6 @@ env:
       version: 30
     - distribution: fedora
       version: 29
-# before_install:
-#   - sudo curl -L https://github.com/hadolint/hadolint/releases/download/v$HADOLINT_VERSION/hadolint-$(uname -s)-$(uname -m) -o /usr/local/bin/hadolint
-#   - sudo chmod 755 /usr/local/bin/hadolint
-#   - hadolint travis-Dockerfile.${distribution}${version}
 install:
   - docker pull ${distribution}:${version}
   - docker build --no-cache --rm --file=travis/Dockerfile.${distribution}${version} --tag=${distribution}${version}:travis travis
