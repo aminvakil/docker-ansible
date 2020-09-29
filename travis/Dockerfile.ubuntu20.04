@@ -8,6 +8,7 @@ RUN apt-get update \
        python3-pip \
        python3-wheel \
        systemd \
+       sudo \
     && rm -Rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean

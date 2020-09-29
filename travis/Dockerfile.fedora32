@@ -12,7 +12,7 @@ rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
 rm -f /lib/systemd/system/basic.target.wants/*;\
 rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-RUN dnf -y install python3-pip && dnf clean all
+RUN dnf -y install python3-pip sudo && dnf clean all
 
 RUN pip3 install ansible
 
