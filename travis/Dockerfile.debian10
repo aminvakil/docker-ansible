@@ -1,0 +1,9 @@
+FROM debian:10
+
+RUN apt-get update -y && apt-get install -y --no-install-recommends \
+    ansible \
+    systemd \
+    python \
+ && rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["/bin/systemd"]
