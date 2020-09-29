@@ -1,9 +1,14 @@
 FROM debian:10
 
+LABEL maintainer="Amin Vakil <info@aminvakil.com>"
+
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
-    ansible \
     systemd \
-    python \
- && rm -rf /var/lib/apt/lists/*
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /usr/share/doc && rm -rf /usr/share/man \
+    && apt-get clean
+
+RUN pip3 install ansible
 
 ENTRYPOINT ["/bin/systemd"]

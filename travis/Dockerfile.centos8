@@ -1,5 +1,7 @@
 FROM centos:8
 
+LABEL maintainer="Amin Vakil <info@aminvakil.com>"
+
 ENV container docker
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
 systemd-tmpfiles-setup.service ] || rm -f $i; done); \
@@ -11,8 +13,9 @@ rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
 rm -f /lib/systemd/system/basic.target.wants/*;\
 rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-RUN yum -y install epel-release
-RUN yum -y install ansible
+RUN yum -y install python3-pip && yum clean all
+
+RUN pip3 install ansible
 
 VOLUME ["/sys/fs/cgroup"]
 
