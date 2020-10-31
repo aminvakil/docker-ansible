@@ -18,6 +18,8 @@ env:
     - distribution: ubuntu
       version: 16.04
     - distribution: fedora
+      version: 33
+    - distribution: fedora
       version: 32
     - distribution: fedora
       version: 31
