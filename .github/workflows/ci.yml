@@ -47,7 +47,7 @@ jobs:
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [hadolint, build]
+    needs: build
     name: Push to Quay
     runs-on: ubuntu-latest
     strategy:
