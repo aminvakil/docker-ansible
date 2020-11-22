@@ -1,0 +1,79 @@
+---
+name: CI/CD
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+    name: Build and test docker
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - distro: centos8
+          - distro: centos7
+          - distro: debian10
+          - distro: ubuntu20.04
+          - distro: ubuntu18.04
+          - distro: ubuntu16.04
+          - distro: fedora33
+          - distro: fedora32
+          - distro: fedora31
+          - distro: fedora30
+          - distro: fedora29
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Build docker image.
+        run: docker build --no-cache --rm --file=images/Dockerfile.${{ matrix.distro }} --tag ${{  matrix.distro }}:build images
+
+      - name: Run a container of created image.
+        run: |
+          container_id=$(mktemp)
+          docker run --detach --privileged --cap-add=ALL -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /lib/modules:/lib/modules:ro ${{ matrix.distro }}:build > "${container_id}"
+          sleep 5
+          echo "container_id=$container_id" >> $GITHUB_ENV
+
+      - name: Check if ansible is present in container.
+        run: docker exec "$(cat ${container_id})" ansible localhost -m ping
+
+      - name: Check if the container is correctly stopped and removed.
+        run: docker rm -f "$(cat ${container_id})"
+
+  deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [hadolint, build]
+    name: Push to Quay
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - distro: centos8
+          - distro: centos7
+          - distro: debian10
+          - distro: ubuntu20.04
+          - distro: ubuntu18.04
+          - distro: ubuntu16.04
+          - distro: fedora33
+          - distro: fedora32
+          - distro: fedora31
+          - distro: fedora30
+          - distro: fedora29
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Push to Quay
+        uses: docker/build-push-action@v1
+        with:
+          registry: quay.io
+          push: true
+          tags: latest
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+          repository: aminvakil/docker-${{ matrix.distro }}-ansible
