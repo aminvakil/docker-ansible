@@ -74,6 +74,8 @@ jobs:
           registry: quay.io
           push: true
           tags: latest
+          path: images
+          dockerfile: Dockerfile.${{ matrix.distro }}
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
           repository: aminvakil/docker-${{ matrix.distro }}-ansible
