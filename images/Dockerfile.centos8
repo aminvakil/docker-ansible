@@ -15,7 +15,7 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 
 RUN yum -y install python3-pip sudo && yum clean all
 
-RUN pip3 install ansible
+RUN pip3 install --upgrade pip && pip3 install ansible
 
 VOLUME ["/sys/fs/cgroup"]
 
