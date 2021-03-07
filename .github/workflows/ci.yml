@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build docker image.
-        run: docker build --no-cache --rm --file=images/Dockerfile.${{ matrix.distro }} --tag ${{  matrix.distro }}:build images
+        run: docker build --no-cache --rm --file=images/Dockerfile.${{ matrix.distro }} --tag ${{ matrix.distro }}:build images
 
       - name: Run a container of created image.
         run: |
