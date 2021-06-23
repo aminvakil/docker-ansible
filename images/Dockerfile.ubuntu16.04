@@ -1,4 +1,4 @@
-FROM ubuntu:xenial-20210611
+FROM ubuntu:xenial
 
 LABEL maintainer="Amin Vakil <info@aminvakil.com>"
 
