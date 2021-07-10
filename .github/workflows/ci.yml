@@ -22,7 +22,6 @@ jobs:
           - distro: debian11
           - distro: ubuntu20.04
           - distro: ubuntu18.04
-          - distro: ubuntu16.04
           - distro: fedora34
           - distro: fedora33
           - distro: fedora32
@@ -66,7 +65,6 @@ jobs:
           - distro: debian11
           - distro: ubuntu20.04
           - distro: ubuntu18.04
-          - distro: ubuntu16.04
           - distro: fedora34
           - distro: fedora33
           - distro: fedora32
