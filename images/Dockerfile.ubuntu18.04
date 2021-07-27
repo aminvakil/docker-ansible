@@ -9,6 +9,7 @@ RUN apt-get update \
        python3-wheel \
        systemd \
        sudo \
+       git \
     && rm -Rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
