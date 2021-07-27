@@ -13,7 +13,7 @@ rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
 rm -f /lib/systemd/system/basic.target.wants/*;\
 rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-RUN yum -y install python3-pip sudo && yum clean all
+RUN yum -y install python3-pip sudo git && yum clean all
 
 RUN pip3 install git+https://github.com/uranusjr/pip@locations-linux-system
 
