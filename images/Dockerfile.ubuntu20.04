@@ -2,6 +2,10 @@ FROM ubuntu:focal
 
 LABEL maintainer="Amin Vakil <info@aminvakil.com>"
 
+ENV container docker
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
        python3-setuptools \

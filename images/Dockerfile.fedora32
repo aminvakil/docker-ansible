@@ -2,6 +2,10 @@ FROM fedora:32
 
 LABEL maintainer="Amin Vakil <info@aminvakil.com>"
 
+ENV container docker
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 RUN dnf -y install systemd python3-pip sudo && dnf clean all && \
 (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
 rm -f /lib/systemd/system/multi-user.target.wants/*;\
