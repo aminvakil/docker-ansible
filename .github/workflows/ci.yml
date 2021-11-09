@@ -22,9 +22,9 @@ jobs:
           - distro: debian11
           - distro: ubuntu20.04
           - distro: ubuntu18.04
+          - distro: fedora35
           - distro: fedora34
           - distro: fedora33
-          - distro: fedora32
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
@@ -65,9 +65,9 @@ jobs:
           - distro: debian11
           - distro: ubuntu20.04
           - distro: ubuntu18.04
+          - distro: fedora35
           - distro: fedora34
           - distro: fedora33
-          - distro: fedora32
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
