@@ -16,7 +16,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - distro: centos8
           - distro: centos7
           - distro: debian10
           - distro: debian11
@@ -59,7 +58,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - distro: centos8
           - distro: centos7
           - distro: debian10
           - distro: debian11
