@@ -33,7 +33,7 @@ jobs:
       - name: Run a container of created image.
         run: |
           container_id=$(mktemp)
-          docker run --detach --privileged --cap-add=ALL -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /lib/modules:/lib/modules:ro ${{ matrix.distro }}:build > "${container_id}"
+          docker run --detach --privileged --cgroup-parent=docker.slice --cgroupns private --tmpfs /tmp --tmpfs /run --tmpfs /run/lock ${{ matrix.distro }}:build > "${container_id}"
           sleep 5
           echo "container_id=$container_id" >> $GITHUB_ENV
 
