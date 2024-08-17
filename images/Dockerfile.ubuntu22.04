@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:jammy
 
 LABEL maintainer="Amin Vakil <info@aminvakil.com>"
 
@@ -17,6 +17,6 @@ RUN apt-get update \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
-RUN pip3 install --upgrade pip && pip3 install ansible
+RUN pip3 install ansible
 
 ENTRYPOINT ["/bin/systemd"]
