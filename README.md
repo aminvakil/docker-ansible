@@ -3,10 +3,8 @@ Multiple OSs Docker containers for Ansible playbook and role testing (systemd in
 
 Get build nightly using latest docker image
 
-Available on `quay.io/aminvakil/docker-centos8-ansible`
+Available on `quay.io/aminvakil/docker-debian12-ansible`
 
-Available on `quay.io/aminvakil/docker-centos7-ansible`
+Available on `quay.io/aminvakil/docker-ubuntu24.04-ansible`
 
 ...
-
-Not actively maintained anymore, as I use [aminvakil/docker-os-systemd](https://github.com/aminvakil/docker-os-systemd) which only has systemd enabled and can be used to test molecule on it by ansible from outside.
