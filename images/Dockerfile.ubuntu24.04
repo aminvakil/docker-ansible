@@ -17,6 +17,6 @@ RUN apt-get update \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
-RUN pip3 install ansible --break-system-packages
+RUN pip3 install ansible ansible-lint --break-system-packages
 
 ENTRYPOINT ["/bin/systemd"]
