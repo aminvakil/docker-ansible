@@ -16,10 +16,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - distro: debian10
+          - distro: debian12
           - distro: debian11
+          - distro: debian10
+          - distro: ubuntu24.04
+          - distro: ubuntu22.04
           - distro: ubuntu20.04
-          - distro: ubuntu18.04
           - distro: fedora
     steps:
       - name: Check out the codebase.
@@ -55,10 +57,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - distro: debian10
+          - distro: debian12
           - distro: debian11
+          - distro: debian10
+          - distro: ubuntu22.04
+          - distro: ubuntu22.04
           - distro: ubuntu20.04
-          - distro: ubuntu18.04
           - distro: fedora
     steps:
       - name: Set up Docker Buildx
