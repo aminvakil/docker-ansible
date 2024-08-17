@@ -16,6 +16,6 @@ rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
 rm -f /lib/systemd/system/basic.target.wants/*;\
 rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-RUN pip3 install ansible ansible-lint
+RUN pip3 install --no-cache-dir ansible ansible-lint
 
 CMD ["/usr/sbin/init"]
