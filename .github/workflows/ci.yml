@@ -8,6 +8,8 @@ name: CI/CD
   schedule:
     - cron: '0 0 * * *'
 
+concurrency: ci-${{ github.ref }}
+
 jobs:
 
   build:
